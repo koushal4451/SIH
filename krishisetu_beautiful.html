@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KrishiSetu - Farmer Procurement Management</title>
+
+<style>
+:root{--green:#1f8b4c;--dark:#0f5d35;--mint:#eef8f1;--line:#cfe5d6;--text:#294338;--muted:#70827a}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial,sans-serif}
+html{scroll-behavior:smooth}
+body{background:linear-gradient(180deg,#f7fbf8,#edf7f0);color:var(--text)}
+nav{height:92px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 5%;box-shadow:0 3px 18px #15452b12;position:sticky;top:0;z-index:10}
+.logo-wrap{display:flex;align-items:center;gap:12px}.leaf-logo{font-size:43px}.logo{font-size:34px;font-weight:800;color:var(--green)}.logo span{color:#79ad43}.tagline{font-size:14px;color:#718078;margin-top:-3px}
+.navlinks{display:flex;align-items:center;gap:34px}.navlinks a{color:#40564b;text-decoration:none;font-weight:600}.navlinks a:hover{color:var(--green)}
+.login-btn{background:var(--green)!important;color:white!important;padding:13px 25px;border-radius:30px}
+.hero{width:94%;max-width:1220px;margin:28px auto 22px;display:grid;grid-template-columns:2fr 1fr;gap:25px}
+.banner{min-height:255px;border-radius:14px;overflow:hidden;position:relative;background:linear-gradient(120deg,#f3d39c,#8bc65b 58%,#2b8d49);box-shadow:0 8px 24px #164f2b14}
+.banner:before{content:"";position:absolute;inset:0;background:
+radial-gradient(circle at 78% 30%,#fff7b6 0 5%,transparent 5.5%),
+linear-gradient(180deg,transparent 55%,#1d7b3c55 55%),
+repeating-linear-gradient(170deg,transparent 0 32px,#398b3e 33px 36px)}
+.farmer{position:absolute;left:16%;bottom:0;font-size:120px;filter:drop-shadow(0 5px 5px #234d2733)}
+.banner-text{position:absolute;right:8%;top:39%;text-align:center;color:white;text-shadow:0 2px 5px #17482c}
+.banner-text h1{font-size:27px}.banner-text p{font-size:18px;margin-top:6px}
+.login-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:34px 26px;box-shadow:0 8px 24px #164f2b0d;text-align:center}
+.login-icon{font-size:55px;background:#e1f2e5;width:88px;height:88px;border-radius:50%;display:grid;place-items:center;margin:auto auto 18px}
+.login-card h2{color:var(--dark);font-size:29px;margin-bottom:10px}.login-card p{color:var(--muted);line-height:1.5;margin-bottom:25px}
+input,select,textarea{width:100%;padding:14px 15px;border:1px solid #cbded1;border-radius:9px;background:#fff;color:var(--text);outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px #1f8b4c18}
+label{display:block;text-align:left;font-weight:700;margin:12px 0 7px}.btn{width:100%;background:var(--green);color:white;border:0;border-radius:9px;padding:14px 18px;font-weight:800;font-size:16px;cursor:pointer;margin-top:18px}.btn:hover{background:var(--dark)}
+.container{width:94%;max-width:1220px;margin:0 auto 25px}.dashboard-title{display:none}
+.main-grid{display:grid;grid-template-columns:2fr 1fr;gap:25px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px;box-shadow:0 8px 24px #164f2b0d}
+.panel h2{color:var(--dark);font-size:27px;margin-bottom:8px}.sub{color:var(--muted);margin-bottom:20px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 25px}
+.full{grid-column:1/-1}
+.register{background:transparent!important;color:var(--dark)!important;border:1px solid var(--green)!important}
+.or{display:flex;align-items:center;gap:12px;color:#829087;margin:22px 0}.or:before,.or:after{content:"";height:1px;background:#d4e2d8;flex:1}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:25px 0}
+.card{background:#fff;border:1px solid var(--line);padding:20px;border-radius:12px}.card h3{color:var(--green);font-size:28px;margin-top:8px}
+.table-panel{margin-top:25px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse}th,td{padding:13px;text-align:left;border-bottom:1px solid #e6eee8}th{background:var(--dark);color:#fff}.status{padding:6px 10px;border-radius:15px;font-size:12px;font-weight:bold}.pending{background:#fff1bd}.approved{background:#d5f3dc}.completed{background:#dceaff}
+.track{margin-top:25px}.steps{display:flex;gap:8px;margin-top:22px}.step{flex:1;text-align:center;padding:13px;border-top:4px solid #d8e3db;color:#718078}.step.active{border-color:var(--green);color:var(--dark);font-weight:bold}
+.benefits{width:94%;max-width:1220px;margin:30px auto 0;background:#f4faf6;border:1px solid #e1eee5;border-radius:13px;display:grid;grid-template-columns:repeat(4,1fr);padding:18px}.benefit{display:flex;gap:12px;align-items:center;padding:8px 20px;border-right:1px solid #d9e7dd}.benefit:last-child{border-right:0}.bicon{font-size:28px}.benefit b{color:var(--dark)}.benefit small{display:block;color:#809087;margin-top:5px}
+footer{margin-top:25px;height:130px;background:linear-gradient(180deg,#c9e4c3,#75b66c);position:relative;overflow:hidden;border-top:1px solid #a8cfaa}
+.hills{position:absolute;bottom:-60px;width:120%;height:125px;background:#4e9a54;border-radius:50% 50% 0 0/70% 70% 0 0;left:-10%}.hill2{background:#2d7f47;bottom:-75px;left:30%;height:105px}.tractor{position:absolute;right:8%;bottom:15px;font-size:48px}
+@media(max-width:850px){.hero,.main-grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.benefits{grid-template-columns:1fr 1fr}.benefit{border-right:0}.navlinks{gap:12px}.navlinks a:not(.login-btn){display:none}}
+@media(max-width:520px){nav{height:auto;padding:14px 5%;gap:10px}.logo{font-size:27px}.tagline{display:none}.hero{width:92%}.banner{min-height:220px}.banner-text{right:5%;top:35%}.banner-text h1{font-size:21px}.farmer{left:6%;font-size:90px}.container,.benefits{width:92%}.form-grid,.cards,.benefits{grid-template-columns:1fr}.full{grid-column:auto}.steps{flex-direction:column}}
+</style>
+
+</head>
+
+<body>
+<nav>
+  <div class="logo-wrap"><div class="leaf-logo">🌿</div><div><div class="logo">Krishi<span>Setu</span></div><div class="tagline">Connecting Farmers to a Better Tomorrow</div></div></div>
+  <div class="navlinks"><a href="#home">⌂ Home</a><a href="#about">♧ About</a><a href="#tracking">▣ Tracking</a><a href="#contact">✉ Contact</a><a href="#login" class="login-btn">🔐 Login</a></div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="banner">
+    <div class="farmer">👨🏽‍🌾</div>
+    <div class="banner-text"><h1>Empowering Farmers</h1><p>Strengthening Agriculture</p>🌱</div>
+  </div>
+  <div class="login-card" id="login">
+    <div class="login-icon">👨🏽‍🌾</div><h2>Farmer Login</h2>
+    <p>Access your account to track your requests<br>and manage your profile.</p>
+    <form onsubmit="loginUser(event)">
+      <input id="loginId" required placeholder="📱  Farmer ID / Mobile Number">
+      <input id="loginPass" type="password" required placeholder="🔒  Password" style="margin-top:14px">
+      <button class="btn" type="submit">↪ &nbsp; Login</button>
+      <p id="loginMsg" style="margin:12px 0 0;color:var(--green);font-weight:bold"></p>
+      <div class="or">OR</div>
+      <button type="button" class="btn register">♙ &nbsp; New Farmer Registration</button>
+    </form>
+  </div>
+</section>
+
+<section class="container" id="dashboard">
+  <div class="main-grid">
+    <form class="panel" id="procurement" onsubmit="submitRequest(event)">
+      <h2>🌱 Submit Procurement Request</h2>
+      <p class="sub">Provide your crop details and we will help you connect with procurement centers.</p>
+      <div class="form-grid">
+        <div><label>Select Crop *</label><select id="crop"><option>Choose crop</option><option>Wheat</option><option>Rice</option><option>Maize</option><option>Mustard</option><option>Sugarcane</option></select></div>
+        <div><label>Quantity (Quintal) *</label><input id="qty" type="number" min="1" required placeholder="Enter quantity"></div>
+        <div><label>Expected Price (₹/Quintal) *</label><input id="price" type="number" min="1" required placeholder="Enter expected price"></div>
+        <div><label>Preferred Date</label><input type="date"></div>
+        <div class="full"><label>Additional Notes (Optional)</label><textarea rows="3" placeholder="Any special notes or requirements..."></textarea></div>
+      </div>
+      <button class="btn" type="submit">➤ &nbsp; Submit Request</button>
+      <p id="msg" style="margin-top:12px;color:var(--green);font-weight:bold"></p>
+    </form>
+  </div>
+
+  <div class="cards">
+    <div class="card">👨‍🌾 Total Farmers<h3>1,250</h3></div>
+    <div class="card">⏳ Pending Requests<h3>86</h3></div>
+    <div class="card">✅ Approved<h3>342</h3></div>
+    <div class="card">📦 Completed<h3>815</h3></div>
+  </div>
+
+  <div class="panel table-panel">
+    <h2>📋 Recent Procurement Requests</h2>
+    <div class="table-wrap"><table id="requestTable">
+      <tr><th>Farmer</th><th>Crop</th><th>Quantity</th><th>Status</th></tr>
+      <tr><td>Raj Kumar</td><td>Wheat</td><td>50 Q</td><td><span class="status approved">Approved</span></td></tr>
+      <tr><td>Amit Kumar</td><td>Rice</td><td>30 Q</td><td><span class="status pending">Pending</span></td></tr>
+      <tr><td>Suresh</td><td>Maize</td><td>20 Q</td><td><span class="status completed">Completed</span></td></tr>
+    </table></div>
+  </div>
+
+  <div class="panel track" id="tracking">
+    <h2>🚚 Track Procurement</h2>
+    <p class="sub">Request ID: <b>FT-2026-00125</b> &nbsp;|&nbsp; Farmer: <b>Raj Kumar</b> &nbsp;|&nbsp; Crop: <b>Wheat</b></p>
+    <div class="steps"><div class="step active">1<br>Request Submitted</div><div class="step active">2<br>Under Review</div><div class="step active">3<br>Approved</div><div class="step">4<br>Crop Collected</div><div class="step">5<br>Payment Completed</div></div>
+  </div>
+</section>
+
+<section class="benefits" id="about">
+  <div class="benefit"><span class="bicon">🌿</span><div><b>Direct Farmer Support</b><small>No middlemen, better prices</small></div></div>
+  <div class="benefit"><span class="bicon">🛡️</span><div><b>Transparent Process</b><small>Track your request in real-time</small></div></div>
+  <div class="benefit"><span class="bicon">🚜</span><div><b>Efficient Procurement</b><small>Timely collection & payment</small></div></div>
+  <div class="benefit"><span class="bicon">🌱</span><div><b>Stronger Agriculture</b><small>For a sustainable future</small></div></div>
+</section>
+
+<footer id="contact">
+  <div class="hills"></div>
+  <div class="hills hill2"></div>
+  <div class="tractor">🚜</div>
+</footer>
+</body>
+</html>
